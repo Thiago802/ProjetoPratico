@@ -5,6 +5,12 @@
 #include <math.h>
 #include <locale.h>
 
+
+#define MAX_PASSAGEIROS 20
+#define MAX_TRIPULANTE 20
+//contador universal
+int contP=0,contT=0;
+
 struct Data{
     int dia;
     int mes;
@@ -59,21 +65,21 @@ struct Reserva{
     struct Passageiro CodPassageiro;
 };
 
-void PreencheTripulacao(struct Tripulacao tripulacao){
+void PreencheTripulacao(struct Tripulacao tripulantes[MAX_TRIPULANTE]){
     printf("cod tripulante: ");
-    scanf("%i", tripulacao.cod_tripulante);
+    scanf("%i", tripulantes[contT].cod_tripulante);
     fflush(stdin);
 
     printf("Nome: ");
-    scanf(" %[^\n]", tripulacao.nomeTripulante);
+    scanf(" %[^\n]", tripulantes[contT].nomeTripulante);
     fflush(stdin);
 
     printf("Telefone: ");
-    scanf(" %[^\n]", tripulacao.TelTripulante);
+    scanf(" %[^\n]", tripulantes[contT].TelTripulante);
     fflush(stdin);
 
     printf("Cargo(piloto/copiloto/comissario): ");
-    scanf(" %[^\n]", tripulacao.cargo);
+    scanf(" %[^\n]", tripulantes[contT].cargo);
     fflush(stdin);
 }
 
@@ -138,35 +144,49 @@ void PreencheVoo(struct Voo voo){
 
 }
 
-void PreenchePassageiro(struct Passageiro passageiro){
+void PreenchePassageiro(struct Passageiro passageiros[MAX_PASSAGEIROS]){
 
-    printf("\ncod passageiro: ");
-    scanf("%i",&passageiro.cod);
-    fflush(stdin);
+   if (contP < MAX_PASSAGEIROS){
+        printf("\ncod passageiro: ");
+        scanf("%i",&passageiros[contP].cod);
+        fflush(stdin);
 
-    printf("Nome do passageiro: ");
-    scanf(" %[^\n]", &passageiro.nome);
-    fflush(stdin);
+        printf("Nome do passageiro: ");
+        scanf(" %[^\n]", &passageiros[contP].nome);
+        fflush(stdin);
 
-    printf("Endereço: ");
-    scanf(" %[^\n]", &passageiro.endereco);
-    fflush(stdin);
+        printf("Endereço: ");
+        scanf(" %[^\n]", &passageiros[contP].endereco);
+        fflush(stdin);
 
-    printf("Telefone: ");
-    scanf(" %[^\n]", &passageiro.tel);
-    fflush(stdin);
+        printf("Telefone: ");
+        scanf(" %[^\n]", &passageiros[contP].tel);
+        fflush(stdin);
 
-    printf("Faz parte do  programa de fidelidade?\nDigite '0' para NÃO e '1' para SIM: ");
-    scanf("%i", &passageiro.fidelidade);
-    fflush(stdin);
+        printf("Faz parte do  programa de fidelidade?\nDigite '0' para NAO e '1' para SIM: ");
+        scanf("%i", &passageiros[contP].fidelidade);
+        fflush(stdin);
 
-    printf("\ncódigo pessoa: %i", passageiro.cod);
-    printf("\nNome: %s", passageiro.nome);
-    printf("\nEndereço: %s", passageiro.endereco);
-    printf("\nTelefone: %s",passageiro.tel);
-    //printf("Pontos acumulados: %i", passageiro.PontoFid);
+        printf("\ncódigo pessoa: %i", passageiros[contP].cod);
+        printf("\nNome: %s", passageiros[contP].nome);
+        printf("\nEndereço: %s", passageiros[contP].endereco);
+        printf("\nTelefone: %s",passageiros[contP].tel);
+        //printf("Pontos acumulados: %i", passageiros[contP].PontoFid);
+
+        contP++;
+    }
 
 }
+
+void ImprimePassageiro(struct Passageiro passageiros[MAX_PASSAGEIROS]){
+    for(int i=0;i<contP|| i<MAX_PASSAGEIROS;i++){
+        printf("\ncódigo pessoa: %i", passageiros[contP].cod);
+        printf("\nNome: %s", passageiros[contP].nome);
+        printf("\nEndereço: %s", passageiros[contP].endereco);
+        printf("\nTelefone: %s\n",passageiros[contP].tel);
+    }
+}
+
 
 void PreencheAssento(struct Assento assento){
     printf("Numero do assento: ");
@@ -186,14 +206,20 @@ void PreencheAssento(struct Assento assento){
 int main()
 {
     setlocale(LC_ALL, "pt_BR.UTF-8");
-    struct Tripulacao tripulacao;
+
+    FILE *arq;
+
+    struct Tripulacao tripulantes[MAX_TRIPULANTE];
+    struct Passageiro passageiros[MAX_PASSAGEIROS];
+
     struct Voo voo;
-    struct Passageiro passageiro ;
     struct Assento assento;
     struct Reserva reserva;
 
     //PreencheVoo(voo);
     //PreenchePassageiro(passageiro);
-    PreencheTripulacao(tripulacao);
+    PreenchePassageiro(passageiros);
+    PreencheTripulacao(tripulantes);
+    //PreencheTripulacao(tripulantes);
 
 }
