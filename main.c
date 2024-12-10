@@ -226,10 +226,10 @@ void ImprimeVoo(struct Voo voo[MAX_VOO]){
         printf("\nHora: %d:%d", voo[i].HoraVoo.hora,voo[i].HoraVoo.minuto);
         printf("\nOrigem do voo: %s", voo[i].origem);
         printf("\nDestino do voo: %s", voo[i].destino);
-        printf("\nCodigo do avião: %i",voo[i].cod_aviao);
-        printf("\nCodigo do piloto: %i", voo[i].cod_piloto);
-        printf("\nCodigo do copiloto: %i", voo[i].cod_copiloto);
-        printf("\nCodigo do/a comissario/a de bordo: %i", voo[i].cod_comissaria);
+        printf("\nCódigo do avião: %i",voo[i].cod_aviao);
+        printf("\nCódigo do piloto: %i", voo[i].cod_piloto);
+        printf("\nCódigo do copiloto: %i", voo[i].cod_copiloto);
+        printf("\nCódigo do/a comissario/a de bordo: %i", voo[i].cod_comissaria);
         printf("STATUS SELECIONADO: %s", voo[i].status);
         printf("Tarifa: R$%i", voo[i].tarifa);
      }
@@ -561,12 +561,13 @@ int main()
     printf("----MENU----\n");
     printf("1-Passageiro\n2-Tripulação\n3-Voo\n4-Assento\n5-Reserva\n");
     printf("---- ---- ----");
-
+    scanf("%i",&caso);
     switch (caso){
     case 1:
         printf("\n---- PASSAGEIRO ----\n");
         printf("1-Preencher\n2-Atualizar\n3-Deletar passageiro\n4-Imprimir informações");
-        printf("\n---- ---- ----");
+        printf("\n---- ---- ----\n");
+        scanf("%i",&subcaso_passageiro);
         switch(subcaso_passageiro){
         case 1:
             PreenchePassageiro(passageiros);
@@ -588,6 +589,7 @@ int main()
         printf("\n---- TRIPULAÇÃO ----\n");
         printf("1-Preencher\n2-Atualizar\n3-Deletar passageiro\n4-Imprimir informações");
         printf("\n---- ---- ----\n");
+        scanf("%i",&subcaso_tripulacao);
         switch(subcaso_tripulacao){
         case 1:
             PreencheTripulacao(tripulantes);
@@ -606,6 +608,7 @@ int main()
         printf("\n---- VOO ----\n");
         printf("1-Preencher\n2-Atualizar\n3-Deletar passageiro\n4-Imprimir informações");
         printf("\n---- ---- ----\n");
+        scanf("%i",subclasse_voo);
         switch (subclasse_voo){
         case 1:
             PreencheVoo(voo);
@@ -623,6 +626,7 @@ int main()
         printf("\n---- ASSENTO ----\n");
         printf("1-Preencher\n2-Atualizar\n3-Deletar passageiro\n4-Imprimir informações");
         printf("\n---- ---- ----\n");
+        scanf("%i",&subclasse_Assento);
         switch(subclasse_Assento){
         case 1:
             PreencheAssento(assento);
